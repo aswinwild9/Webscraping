@@ -5,12 +5,12 @@ import scrapy
 
 
 
-class QuotesSpider(scrapy.Spider):
-    name = "quotes"
+class WalkSpider(scrapy.Spider):
+    name = "walkintonight"
 
     def start_requests(self):
         urls = [
-            'https://www.ulule.com/195metres-film/',
+            'https://www.ulule.com/une_balade_dans_la_nuit/',
 
         ]
         for url in urls:
@@ -24,11 +24,9 @@ class QuotesSpider(scrapy.Spider):
 
         nametag = data['name']['en']
         short_description = data['subtitle']['en']
-        no_of_supporters = str(data['supporters_count']) + ' Backers'
+        no_of_supporters = str(data['supporters_count']) + ' Contributions'
         fund_raised ='amount: ' + str(data['amount_raised']) + ', currency: ' + data['currency']
         goal ='amount: ' + str(data['goal']) + ', currency: ' + data['currency']
-        days_left = 'Campaign Ended the ' + data['date_start']
-        video = data['video']['url']
         percentage_funded = str(data['percent']) + '.00'
         creator = '{name: ' + data['name']['en'] + ', location: ' + data['owner']['location'] + ', url: ' + data['absolute_url']  + '}'
 
@@ -42,12 +40,8 @@ class QuotesSpider(scrapy.Spider):
             'no_of_supporters': no_of_supporters,
             'fund_raised': fund_raised,
             'goal': goal,
-            'days_left': days_left,
-            'video': video,
             'percentage_funded': percentage_funded,
             'creator': creator,
-
-
 
         }
 
